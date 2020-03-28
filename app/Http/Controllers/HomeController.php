@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TicketCollection;
+use App\Http\Resources\TicketResource;
+use App\Ticket;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $tickets = auth()->user()->tickets()->paginate(10);
+        $tickets_resource = TicketResource::collection($tickets);
+        $data = (object)[
+            'tickets' => json_decode($tickets_resource->toJson()),
+            'links' => $tickets->links()
+        ];
+        return view('user.tickets.index')->with('data', $data);
+//        return $tickets;
     }
 }
