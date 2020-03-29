@@ -26,13 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $tickets = auth()->user()->tickets()->paginate(10);
-        $tickets_resource = TicketResource::collection($tickets);
-        $data = (object)[
-            'tickets' => json_decode($tickets_resource->toJson()),
-            'links' => $tickets->links()
-        ];
-        return view('user.tickets.index')->with('data', $data);
-//        return $tickets;
+        //
     }
 }

@@ -16,11 +16,13 @@ class TicketResource extends JsonResource
     {
 //        return parent::toArray($request);
         return [
+            'id' => $this->id,
             'priority' => $this->priority,
             'category' => $this->category->name,
             'title' => $this->title,
+            'description' => $this->description,
             'status' => $this->status,
-            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

@@ -18,7 +18,7 @@ class CategoriesTableSeeder extends Seeder
             'Internet',
         ];
         foreach($categories as $key => $category){
-            (new \App\Category())->updateOrInsert(['id' => ++$key], ['name' => 'Computador', 'status' => true]);
+            (new \App\Category())->updateOrInsert(['id' => ++$key], ['name' => $categories[$key-1], 'status' => true]);
         }
     }
 }

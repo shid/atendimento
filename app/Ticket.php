@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     protected $fillable = [
-        'user_id', 'title', 'description', 'status'
+        'category_id', 'user_id', 'title', 'description', 'priority', 'status'
     ];
 
     public function user()
@@ -18,6 +18,11 @@ class Ticket extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
 }

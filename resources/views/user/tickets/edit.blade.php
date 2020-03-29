@@ -1,0 +1,143 @@
+@extends('layouts.app')
+
+@section('custom-style')
+<style>
+
+</style>
+@endsection
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex">
+                        <div class="d-flex align-items-center mr-auto">Solicitação</div>
+                        <div class="d-flex align-items-center">
+                            <a href="{{ url('home') }}" class="btn btn-sm btn-primary">Voltar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+                    <div class="">
+                        <div class="form-group row">
+                            <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('Categories') }}</label>
+                            <div class="col-md-6">
+                                @foreach($data->categories as $category)
+                                    @if($category['id'] == $data->ticket->category_id)
+                                        <div class="form-control">
+                                            {{$category['name']}}
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="priority" class="col-md-4 col-form-label text-md-right">{{ __('Priority') }}</label>
+                            <div class="col-md-6">
+                                @foreach($data->priority as $priority)
+                                    @if($priority['id'] == $data->ticket->priority)
+                                        <div class="form-control">
+                                            {{$priority['name']}}
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
+
+                            <div class="col-md-6">
+                                <div class="form-control">
+                                    {{$data->ticket->title}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+
+                            <div class="col-md-6">
+                                <textarea rows="5" class="form-control" name="description" disabled>{{ $data->ticket->description }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex">
+                        <div class="d-flex align-items-center mr-auto">Comentários</div>
+                        <div class="d-flex align-items-center"></div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                    <div class="">
+                        <form method="POST" action="{{ route('ticket-update', ['ticket' => $data->ticket->id]) }}">
+                            @csrf
+
+{{--                            <div class="form-group row">--}}
+{{--                                <label for="comment" class="col-md-4 col-form-label text-md-right">{{ __('Comment') }}</label>--}}
+
+{{--                                <div class="col-md-6">--}}
+{{--                                    <input id="comment" type="text" class="form-control @error('comment') is-invalid @enderror" name="title" value="{{ old('comment') }}" required autocomplete="comment">--}}
+
+{{--                                    @error('comment')--}}
+{{--                                    <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                    @enderror--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
+{{--                            <div class="form-group row mb-0">--}}
+{{--                                <div class="col-md-6 offset-md-4">--}}
+{{--                                    <button type="submit" class="btn btn-sm btn-primary">--}}
+{{--                                        {{ __('Save') }}--}}
+{{--                                    </button>--}}
+
+{{--                                    <a href="{{ url('home') }}" class="btn btn-sm btn-primary">Cancelar</a>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
+
+
+                            <chat-component></chat-component>
+
+
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('custom-javascript')
+    <script>
+
+    </script>
+@endsection

@@ -11,7 +11,7 @@ $factory->define(Ticket::class, function (Faker $faker) {
         'user_id' => 2,
         'title' => $faker->sentence,
         'description' => implode(' ', $faker->sentences(4)),
-        'priority' => rand(1, 5),
+        'priority' => rand(1, 4),
         'status' => 1
     ];
 });
