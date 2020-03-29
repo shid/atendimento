@@ -93,41 +93,18 @@
                         </div>
                     @endif
                     <div class="">
-                        <form method="POST" action="{{ route('ticket-update', ['ticket' => $data->ticket->id]) }}">
-                            @csrf
-
-{{--                            <div class="form-group row">--}}
-{{--                                <label for="comment" class="col-md-4 col-form-label text-md-right">{{ __('Comment') }}</label>--}}
-
-{{--                                <div class="col-md-6">--}}
-{{--                                    <input id="comment" type="text" class="form-control @error('comment') is-invalid @enderror" name="title" value="{{ old('comment') }}" required autocomplete="comment">--}}
-
-{{--                                    @error('comment')--}}
-{{--                                    <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                    @enderror--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="form-group row mb-0">--}}
-{{--                                <div class="col-md-6 offset-md-4">--}}
-{{--                                    <button type="submit" class="btn btn-sm btn-primary">--}}
-{{--                                        {{ __('Save') }}--}}
-{{--                                    </button>--}}
-
-{{--                                    <a href="{{ url('home') }}" class="btn btn-sm btn-primary">Cancelar</a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-
-
-                            <chat-component></chat-component>
+{{--                        <form method="POST" action="{{ route('comment-store', ['ticket' => $data->ticket->id]) }}">--}}
+{{--                            @csrf--}}
 
 
 
 
-                        </form>
+                            <chat-component user_id="{{auth()->user()->id}}" reply_to="0" ticket_id="{{$data->ticket->id}}"></chat-component>
+
+
+
+
+{{--                        </form>--}}
                     </div>
                 </div>
             </div>

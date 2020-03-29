@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
+use App\Http\Resources\CommentResource;
 use App\Ticket;
 use Illuminate\Http\Request;
 
@@ -35,7 +37,20 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = $request->only(['ticket_id', 'user_id', 'reply_to', 'comments']);
+        $comment['status'] = true;
+
+        Comment::create([
+            'ticket_id' => $comment['ticket_id'],
+            'user_id' => $comment['user_id'],
+            'reply_to' => $comment['reply_to'],
+            'comments' => $comment['comments']
+        ]);
+
+        $tickets = Comment::whereTicketId($comment['ticket_id'])->get();
+
+        $comments = CommentResource::collection($tickets);
+        return $comments;
     }
 
     /**
@@ -46,7 +61,8 @@ class CommentController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        return $ticket->comments;
+        $comments = CommentResource::collection($ticket->comments);
+        return $comments;
     }
 
     /**
