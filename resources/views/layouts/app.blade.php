@@ -15,9 +15,18 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        input:focus {
+            outline: none;
+            border: none;
+        }
+    </style>
+    @yield('custom-style')
 </head>
 <body>
     <div id="app">
@@ -78,5 +87,6 @@
             @yield('content')
         </main>
     </div>
+    @yield('custom-javascript')
 </body>
 </html>
