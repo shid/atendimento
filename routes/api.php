@@ -21,4 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::middleware('token.guard')->group(function () {
     Route::get('/comments/{ticket}/show', 'CommentController@show')->name('comments-show');
+    Route::post('/comments/save', 'CommentController@store')->name('comments-store');
 });

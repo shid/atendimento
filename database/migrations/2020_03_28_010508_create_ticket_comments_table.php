@@ -18,7 +18,7 @@ class CreateTicketCommentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('ticket_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('user_reply_id');
+            $table->unsignedBigInteger('reply_to');
             $table->text('comments');
             $table->integer('status')->default(1);
             $table->timestamp('created_at')->useCurrent();
@@ -26,7 +26,7 @@ class CreateTicketCommentsTable extends Migration
 
             $table->foreign('ticket_id')->references('id')->on('tickets');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('user_reply_id')->references('id')->on('users');
+            $table->foreign('reply_to')->references('id')->on('users');
         });
     }
 

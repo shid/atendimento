@@ -16,7 +16,7 @@ class VerifyTokenGuard
      */
     public function handle($request, Closure $next)
     {
-        $tokenValid = TokenGuard::whereToken($request->header('Authorization'))->exists();
+        $tokenValid = TokenGuard::whereToken($request->header('Authorization'))->whereStatus(true)->exists();
 
         if (!$tokenValid) {
             return response()->json('Unauthorized', 401);
